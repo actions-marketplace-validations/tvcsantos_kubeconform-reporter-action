@@ -11,6 +11,7 @@ This action aims to provide support for generating reports for  [`Kubeconform`][
 manifests validator, with support for Custom Resources!
 
 Several output modes are supported depending on the user input and if the action is run on a pull request:
+
 - `pr-comment` - report will be added as a comment on PR.
 - `check` - report will be added in a GitHub check.
 - `summary` - report will be added as a summary.
@@ -73,20 +74,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Do Kubeconform report
-        uses: tvcsantos/kubeconform-reporter-action@v2
+        uses: tvcsantos/kubeconform-reporter-action@v3
         with:
           file: /path/to/kubeconform/results/file.json
 ```
 
 ### Inputs
 
-| Input           | Type         | Required | Default Value                                                                                 | Description                                                                                                                                         |
-|-----------------|--------------|----------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `file`          | String       | Yes      | -                                                                                             | Path to `Kubeconform` `JSON` results file.                                                                                                          |
-| `show-filename` | Boolean      | No       | `true`                                                                                        | Show references to filenames that have errors in the report.                                                                                        |
-| `modes`         | List\<Enum\> | No       | <ul><li>`pr-comment, check` - on a PR context</li><li>`check` - on a non PR context</li></ul> | Report output mode. <ul><li>`pr-comment`</li><li>`check`</li><li>`summary`</li></ul>Multiple output modes can be provided using a multi-line input. |
-| `token`         | Token        | No       | `${{ github.token }}`                                                                         | Your GitHub token.                                                                                                                                  |
-| `fail-on-error` | Boolean      | No       | `false`                                                                                       | Fail the action if errors are found on the report.                                                                                                  |
+<!-- markdownlint-disable MD033 -->
+
+| Input                   | Type         | Required | Default Value                                                                                 | Description                                                                                                                                         |
+|-------------------------|--------------|----------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `file`                  | String       | Yes      | -                                                                                             | Path to `Kubeconform` `JSON` results file.                                                                                                          |
+| `show-filename`         | Boolean      | No       | `true`                                                                                        | Show references to filenames that have errors in the report.                                                                                        |
+| `modes`                 | List\<Enum\> | No       | <ul><li>`pr-comment, check` - on a PR context</li><li>`check` - on a non PR context</li></ul> | Report output mode. <ul><li>`pr-comment`</li><li>`check`</li><li>`summary`</li></ul>Multiple output modes can be provided using a multi-line input. |
+| `token`                 | Token        | No       | `${{ github.token }}`                                                                         | Your GitHub token.                                                                                                                                  |
+| `fail-on-error`         | Boolean      | No       | `false`                                                                                       | Fail the action if errors are found on the report.                                                                                                  |
+| `comment-pr-on-success` | Boolean      | No       | `true`                                                                                        | Comment on PR even if there are no findings.                                                                                                        |
+
+<!-- markdownlint-enable MD033 -->
 
 ### Outputs
 
